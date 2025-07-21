@@ -16,19 +16,6 @@ services:
     networks:
       - nestnet
 
-  app:
-    build: .
-    container_name: nest_app
-    restart: always
-    env_file:
-      - .env
-    ports:
-      - '3000:3000'
-    depends_on:
-      - postgres
-    networks:
-      - nestnet
-
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
