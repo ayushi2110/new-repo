@@ -5,6 +5,7 @@ services:
     image: postgres:16-alpine
     container_name: nest_postgres
     restart: always
+    platform: linux/arm64  # Ensures compatibility with Apple Silicon (M1–M4)
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -15,16 +16,22 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - nestnet
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
     restart: always
+    platform: linux/arm64  # Ensures compatibility with Apple Silicon
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     ports:
-      - "5050:80"
+      - '5050:80'
     depends_on:
       - postgres
     networks:
