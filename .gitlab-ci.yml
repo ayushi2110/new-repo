@@ -1,0 +1,13 @@
+stages:
+  - sync
+
+sync_to_github:
+  stage: sync
+  script:
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    - git config --global user.name "$GITLAB_USER_NAME"
+    - git remote add github "$GITHUB_REPO_URL"
+    - git push github develop
+    - git push github --tags
+  only:
+    - develop  # or your default branch
