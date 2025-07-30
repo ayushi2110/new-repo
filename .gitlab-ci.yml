@@ -9,4 +9,4 @@ mirror_to_github:
     - git remote add github https://<your-username>:$GITHUB_TOKEN@github.com/<your-username>/<github-repo>.git
     - git push --mirror github
   only:
-    - main   # or your main branch name
+    - develop   # or your main branch name
