@@ -7,7 +7,6 @@ variables:
 
 mirror_to_github:
   stage: mirror
-  image: alpine/git:latest
   before_script:
     - git config --global user.name "$GITLAB_USER_NAME"
     - git config --global user.email "$GITLAB_USER_EMAIL"
