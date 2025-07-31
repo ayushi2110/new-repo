@@ -1,13 +1,19 @@
 stages:
   - mirror
 
+variables:
+  GIT_STRATEGY: clone
+  GIT_DEPTH: 0
+
 mirror_to_github:
   stage: mirror
-  script:
-    - git config --global user.email "$GITLAB_USER_EMAIL"
+  image: alpine/git:latest
+  before_script:
     - git config --global user.name "$GITLAB_USER_NAME"
-    - export GITHUB_REPO_URL=https://ayushi2110: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@github.com/ayushi2110/docker-cicd.git
-    - git remote add github "$GITHUB_REPO_URL"
-    - git push --mirror github
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    - git remote add github https://${GITHUB_TOKEN}@github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}.git
+  script:
+    - git push github HEAD:main --force
   only:
-    - develop   # or your main branch name
+    - main
+  retry: 2
