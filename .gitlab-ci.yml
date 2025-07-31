@@ -6,7 +6,8 @@ mirror_to_github:
   script:
     - git config --global user.email "$GITLAB_USER_EMAIL"
     - git config --global user.name "$GITLAB_USER_NAME"
-    - git remote add github "$GITHUB_REPO_URL"
+    - export GITHUB_REPO_URL="$GITHUB_REPO_URL"
+    - git remote add github "$GITHUB_REPO_BASEURL"
     - git push --mirror github
   only:
     - develop   # or your main branch name
