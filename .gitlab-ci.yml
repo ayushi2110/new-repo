@@ -6,8 +6,8 @@ mirror_to_github:
   script:
     - git config --global user.email "$GITLAB_USER_EMAIL"
     - git config --global user.name "$GITLAB_USER_NAME"
-    - export GITHUB_REPO_URL="$GITHUB_REPO_URL"
-    - git remote add github "$GITHUB_REPO_BASEURL"
+    - export GITHUB_REPO_URL=https://ayushi2110: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@github.com/ayushi2110/docker-cicd.git
+    - git remote add github "$GITHUB_REPO_URL"
     - git push --mirror github
   only:
     - develop   # or your main branch name
