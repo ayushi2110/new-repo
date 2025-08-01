@@ -3,14 +3,14 @@ stages:
 
 variables:
   GIT_STRATEGY: clone
-  GIT_DEPTH: 0
+  GIT_DEPTH: 1 
 
 mirror_to_github:
   stage: mirror
   before_script:
     - git config --global user.name "$GITLAB_USER_NAME"
     - git config --global user.email "$GITLAB_USER_EMAIL"
-    - git remote add github https://${GITHUB_TOKEN}@github.com/${GITLAB_USER_NAME}/${GITHUB_REPO_NAME}.git
+    - git remote add github https://${GITHUB_TOKEN}@github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}.git
   script:
     - git push github HEAD:main --force
   only:
